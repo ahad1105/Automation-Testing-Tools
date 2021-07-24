@@ -1,0 +1,32 @@
+package day1;
+import org.openqa.selenium.firefox.*;
+
+
+public class FirstScript {
+
+	public static void main(String[] args) {
+		//Technically Webdriver is an interface and Chrome driver, firefox driver,opera driver are classes which implements webdriver
+		//webdriver is parent and chromedriver,Firefoxdriver,operadriver are classes are child of the webDrivers.
+		
+		
+		
+		System.setProperty("webdriver.gecko.driver", "C:\Users\User\Desktop\Sleenium\geckodriver-v0.29.1-win64\\geckodriver.exe");
+		FirefoxDriver driver1=new FirefoxDriver();
+		driver.get("https://www.selenium.dev/");
+		
+		String title = driver.getTitle();
+		System.out.println("Current page is :" +title);
+		
+		try {
+			Thread.sleep(70000000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		driver.quit();
+		
+		
+ 	}
+
+}
