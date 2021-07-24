@@ -1,0 +1,29 @@
+package day1;            //package name 
+import org.openqa.selenium.chrome.ChromeDriver;                 //import selenium package for eclipse
+
+public class FirstScript {
+
+	public static void main(String[] args) {
+		//Technically Webdriver is an interface and Chrome driver, firefox driver,opera driver are classes which implements webdriver
+		//webdriver is parent and chromedriver,Firefoxdriver,operadriver are classes are child of the webDrivers.
+		
+    System.setProperty("webdriver.gecko.driver", "C:\\Users\\User\\Desktop\\Sleenium\\geckodriver-v0.29.1-win64\\geckodriver.exe");   //o set the path of the driver for the respective browser you will need the System.set property
+		ChromeDriver driver=new ChromeDriver();   //Creating a object to instantiate the browser driver.
+		driver.get("https://www.selenium.dev/");       //Navigating through a particular website  
+		
+		String title = driver.getTitle();                       //Driver.getTitle gets the title of the page.
+		System.out.println("Current page is" +title);
+		
+		try {
+			Thread.sleep(7000);                          //Thread.sleep is use to manipulate the amount of time you can display the automated webpage using selenium code
+		} catch (InterruptedException e) {           //it throws an exception so to handle that we need either try-catch block or throws keyword. 
+			
+			e.printStackTrace();
+		}
+		
+		driver.quit();                          //close the connection
+		
+		
+ 	}
+
+}
