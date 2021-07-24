@@ -1,1 +1,45 @@
+package day1;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.*;
+import java.util.Scanner;
+
+public class CallingBoth {
+
+	public static void main(String[] args) throws InterruptedException {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter choice no");
+		int n = sc.nextInt();
+		if(n==1)
+		{
+			System.setProperty("webdriver.gecko.driver", "C:\\Users\\User\\Desktop\\Sleenium\\geckodriver-v0.29.1-win64\\geckodriver.exe");
+			FirefoxDriver driver1=new FirefoxDriver();
+			driver1.get("https://www.selenium.dev/");
+			
+			String title = driver1.getTitle();
+			System.out.println("Current page is :" +title);
+			
+			Thread.sleep(70000000);
+			driver1.quit();
+			
+		}
+		else if(n==2)
+		{
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+			ChromeDriver driver = new ChromeDriver(); 
+			driver.get("https://www.selenium.dev");
+			String title1 = driver.getTitle();
+			System.out.println("Current Page is: " +title1);
+			Thread.sleep(70000000);
+			driver.quit();
+		}
+		else
+		{
+			System.out.println("Invalid Browser entered");
+		}
+		
+		
+
+	}
+
+}
 
