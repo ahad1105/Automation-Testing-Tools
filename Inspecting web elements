@@ -1,0 +1,30 @@
+package day1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class SeleniumDev {
+
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.get("https://www.selenium.dev/");
+		driver.findElement(By.id("gsc-i-id1")).sendKeys("LTI");
+		driver.findElement(By.linkText("Downloads")).click();
+		String title = driver.getTitle();
+		System.out.println("Current page title is "+title);
+		
+		Thread.sleep(2000);
+		driver.quit();
+	}
+
+}
+
+
+//.send keys is use to give something in the text box 
+//find element using certain properties and features 
+//.get title is use to print the title of the page
+//.get is use to go the webpage or webadress assigned
+//.click is use to click that button
+
