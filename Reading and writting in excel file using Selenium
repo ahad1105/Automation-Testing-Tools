@@ -1,0 +1,10 @@
+//to read file contents 
+
+sh.getRow(i).getCell(1).toString();
+
+//to write file contents
+sh.getRow(0).createCell(2).setCellValue("Results");
+		sh.createRow(1).createCell(2).setCellValue("login failed");
+		sh.createRow(2).createCell(2).setCellValue("login failed");
+		sh.createRow(3).createCell(2).setCellValue("login passed");
+		sh.createRow(4).createCell(2).setCellValue("login failed");
