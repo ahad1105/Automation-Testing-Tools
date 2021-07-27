@@ -1,0 +1,77 @@
+//objective
+//* Do login & logout Process 4 time using data from excel sheet & If login is
+// * done then mention in console login is done & if login is Failed then mention
+// * in console login is failed.
+
+ // step1 : Load the chrome driver and get the url of the orangehrm website along with all the important packages
+//step2: load the workbook and the excel sheet in your code
+//step3 : run a for loop till the last row of the cell 
+//step4: inside that for loop take 4 values from the excel sheet in which one of the values(username and psswd) are right 
+//step5: have a if condition if correct login credentials are provided (can identify that dashboard is loaded in the url when login done) 
+//step6: have elements of logout and click on that button 
+//step7: check for other records 
+
+
+
+
+
+package Selenium;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Reading2 {
+
+	public static void main(String[] args) throws FileNotFoundException, IOException, InterruptedException {
+		
+		
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+		ChromeDriver driver = new ChromeDriver();
+		driver.get("https://opensource-demo.orangehrmlive.com/");
+		
+		XSSFWorkbook wb = new XSSFWorkbook(new FileInputStream("C:\\Users\\User\\Desktop\\poi-bin-5.0.0-20210120\\poi-5.0.0\\Demo.xlsx"));
+		XSSFSheet sh = wb.getSheet("Sheet1");
+		
+		for (int i=0; i<=sh.getLastRowNum(); i++)
+		{
+		
+		
+		String un = sh.getRow(i).getCell(0).toString();
+		System.out.println(un);
+    	String pwd =sh.getRow(i).getCell(1).toString();
+    	System.out.println(pwd);
+    	
+    	
+    	 driver.findElement(By.name("txtUsername")).sendKeys(un);  
+           
+         driver.findElement(By.name("txtPassword")).sendKeys(pwd);  
+         driver.findElement(By.name("Submit")).click();
+		
+		if (driver.getCurrentUrl().contains("dashboard")) {
+			driver.findElement(By.cssSelector("a.panelTrigger")).click();
+			Thread.sleep(2000);
+			driver.findElement(By.cssSelector("a[href='/index.php/auth/logout']")).click();
+			System.out.println("Login Done");
+			
+		} else {
+			System.out.println("Login Failed");
+			
+			
+		}
+	}
+
+		
+		
+		
+		
+
+	}
+
+}
