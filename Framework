@@ -1,0 +1,53 @@
+It is a set of protocal/guidelines which is when it is done its going to give you good outcome
+Test Automation framework : 
+Set of resuable classes and methods and object and object repository (database of the object)
+we will be using all objects property
+
+import java.io.FileInputStream;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class Excel {
+	Workbook wb; // Parent p=new Child
+
+	public Excel(String pathWithFileName) {                   //to check if the file is xls or xlsx 
+		try {
+			if (pathWithFileName.endsWith(".xls")) {
+				wb = new HSSFWorkbook(new FileInputStream(pathWithFileName));
+			} else if (pathWithFileName.endsWith(".xlsx")) {
+				wb = new XSSFWorkbook(new FileInputStream(pathWithFileName));
+			}
+		} catch (Exception E) {
+			System.out.println("Error with File Reading " + E.getMessage());
+		}
+	}
+
+	public String readData(String sheetName, int row, int col) {                        //to read data
+		String data = wb.getSheet(sheetName).getRow(row).getCell(col).toString();
+		return data;
+	}
+
+	public int getLastRowNum(String sheetName) {                      //to get cells
+		return wb.getSheet(sheetName).getLastRowNum();
+	}
+}
+
+
+
+Runner file :
+package fm;
+
+public class Runner {
+
+	public static void main(String[] args) throws Exception {
+		Excel ex=new Excel("C:\\Users\\User\\Desktop\\poi-bin-5.0.0-20210120\\poi-5.0.0\\Demo.xlsx");
+		
+		System.out.println(ex.readData("sheet1", 0, 0));
+		
+		
+		
+	}
+
+}
