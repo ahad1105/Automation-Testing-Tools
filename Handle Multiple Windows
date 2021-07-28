@@ -1,0 +1,7 @@
+//To handle multiple windows using Iframe and Selenium
+//to handle multiple windows in selenium that are opened (get windows handle()) method.  This method will return the ID of window 
+// to get the id of all the tabs and store it in the window we have to use a set 
+//to traverse thru all the windows we have to use for each loop
+//to close the child window we have to use a for loop that doesnt merges with the parent ID 
+//switch.to() is used to switch to child window
+
