@@ -1,0 +1,49 @@
+package Day4junit;                                           
+
+import static org.junit.Assert.*;
+
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.Color;
+
+public class ColourTest {
+	
+	static WebDriver driver;
+
+	@BeforeClass   //implemented before the execution of a test 
+	public static void setUpBeforeClass() throws Exception {
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+
+			driver = new ChromeDriver();
+	
+	}
+
+	@AfterClass   //after execution of a test 
+	public static void tearDownAfterClass() throws Exception {
+		
+			Thread.sleep(5000);
+			driver.quit();
+	}
+
+	@Test
+	public void test() {     //to conduct an actual test 
+		driver.get("https://blazedemo.com/");
+		WebElement E=driver.findElement(By.cssSelector("input[value='Find Flights']"));
+		
+		String backColor = E.getCssValue("background-color");   //to get the background colour
+		System.out.println("the background color is:" +backColor);
+		
+		String hexColor = Color.fromString(backColor).asHex();     //to get the colour in hex format
+		System.out.println(hexColor);
+		assertEquals("#006dcc",hexColor);    //validation or checkpoints for an application 
+		
+		
+	}
+
+}
