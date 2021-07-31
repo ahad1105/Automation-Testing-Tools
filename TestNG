@@ -1,0 +1,39 @@
+Execution Flow of TestNG - (default) --------> before test ----> test ------> after test.
+Before Test ------> precondition  - declare the browser and start the browser
+After Test --------> After execution of all the test use to generally close the drivers
+Test -------> Main execution of the test occurs
+
+
+package TestNG;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+
+public class FirstTest {
+	WebDriver driver;  //need to make it global so that it can be acessed by everyone.
+  @Test
+  public void Titletest() {
+	  driver.get("https://www.google.com/");
+	  Assert.assertEquals(driver.getTitle(), "Google");
+	  //assert is a method that is used to check expected results with actual results.
+	  //driver.getTitle() is used to give the title of the page.
+  }
+  @BeforeTest
+  public void beforeTest() {
+	  System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+		 driver = new ChromeDriver();
+		//parent P = new Child() passing the reference of parent and making the object of child.
+		//so that only the important features of the parent and child are visible. 
+		 
+  }
+
+  @AfterTest
+  public void afterTest() {
+	  driver.close();
+  }
+
+}
