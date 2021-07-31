@@ -1,0 +1,74 @@
+package TestNG;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+
+public class FirstTest {
+	WebDriver driver;  //need to make it global so that it can be acessed by everyone.
+  @Test
+  public void Titletest() {
+	  driver.get("https://www.google.com/");
+	  Assert.assertEquals(driver.getTitle(), "Google");
+	  //assert is a method that is used to check expected results with actual results.
+	  //driver.getTitle() is used to give the title of the page.
+  }
+  @Test //(priority = 2)          
+	public void searchTest() {
+		driver.findElement(By.name("q")).sendKeys("lti"); //send keys is used to type in the elements in the search field
+		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);  //Keys.ENTER is use to enter the typed element in the field
+		Assert.assertTrue(driver.getTitle().contains("lti")); //once we have entered our stuff then the title of the page changes so we can check for the title using this getTitle.contains().
+	}
+
+  
+  
+  @BeforeTest
+  public void beforeTest() {
+	  System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+		 driver = new ChromeDriver();
+		//parent P = new Child() passing the reference of parent and making the object of child.
+		//so that only the important features of the parent and child are visible. 
+		 
+  }
+
+  @AfterTest
+  public void afterTest() {
+	  driver.close();
+  }
+
+}
+
+
+
+
+
+
+
+Output: 
+[RemoteTestNG] detected TestNG version 7.4.0
+Starting ChromeDriver 91.0.4472.101 (af52a90bf87030dd1523486a1cd3ae25c5d76c9b-refs/branch-heads/4472@{#1462}) on port 26050
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+Jul 31, 2021 12:16:34 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+PASSED: searchTest
+PASSED: Titletest
+
+===============================================
+    Default test
+    Tests run: 2, Failures: 0, Skips: 0
+===============================================
+
+
+===============================================
+Default suite
+Total tests run: 2, Passes: 2, Failures: 0, Skips: 0
+===============================================
+
+
