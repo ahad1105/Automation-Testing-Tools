@@ -1,0 +1,43 @@
+Test -suite >>>   Its a collection of test cases 
+Why we need it >>>> To run multiple test cases at a time. 
+How to generate it ---->>>> right click on the test ng class and click on convert to  test ng suite .
+
+XML Suite example --> to run multiple test ng at the same time 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+  <test thread-count="5" name="FirstTest">                 //first testng file (3 test) 
+    <classes>
+      <class name="TestNG.FirstTest"/>
+    </classes>
+  </test> <!-- Test -->
+  <test thread-count="5" name="SecondTest">            //second test ng file (1 test) 
+    <classes>
+      <class name="TestNG.SecondTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
+
+output : 
+
+[RemoteTestNG] detected TestNG version 7.4.0
+Starting ChromeDriver 91.0.4472.101 (af52a90bf87030dd1523486a1cd3ae25c5d76c9b-refs/branch-heads/4472@{#1462}) on port 32642
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+Jul 31, 2021 6:02:44 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+Starting ChromeDriver 91.0.4472.101 (af52a90bf87030dd1523486a1cd3ae25c5d76c9b-refs/branch-heads/4472@{#1462}) on port 4088
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+Jul 31, 2021 6:03:35 PM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+
+===============================================
+Suite
+Total tests run: 4, Passes: 4, Failures: 0, Skips: 0
+===============================================
+
+
