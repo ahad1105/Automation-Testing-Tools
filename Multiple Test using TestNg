@@ -24,6 +24,14 @@ public class FirstTest {
 		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);  //Keys.ENTER is use to enter the typed element in the field
 		Assert.assertTrue(driver.getTitle().contains("lti")); //once we have entered our stuff then the title of the page changes so we can check for the title using this getTitle.contains().
 	}
+	
+	@Test(priority=3)
+  public void searchBank() {
+	  driver.get("https://www.rediff.com/");   //to open the driver
+	  driver.switchTo().frame("moneyiframe");  //switch to a different frame 
+	  driver.findElement(By.id("query")).sendKeys("Yes Bank LTD");    //entering yes bank in the money iframe search tab 
+	  driver.findElement(By.id("query")).sendKeys(Keys.ENTER);   //click on enter
+  }
 
   
   
