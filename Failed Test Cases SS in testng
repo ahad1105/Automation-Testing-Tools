@@ -1,0 +1,83 @@
+package TestNG;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.io.FileHandler;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+
+public class FirstTest {
+	WebDriver driver;  //need to make it global so that it can be acessed by everyone.
+  @Test(priority = 1)
+  public void Titletest() {
+	  driver.get("https://www.google.com/");
+	  Assert.assertEquals(driver.getTitle(), "GoogleIndia");
+	  //assert is a method that is used to check expected results with actual results.
+	  //driver.getTitle() is used to give the title of the page.
+  }
+  @Test (priority = 2) 
+	public void searchTest() throws InterruptedException {
+		driver.findElement(By.name("q")).sendKeys("lti"); //send keys is used to type in the elements in the search field
+		driver.findElement(By.name("q")).sendKeys(Keys.ENTER);  //Keys.ENTER is use to enter the typed element in the field
+		Assert.assertTrue(driver.getTitle().contains("lti"));//once we have entered our stuff then the title of the page changes so we can check for the title using this getTitle.contains().
+		Thread.sleep(2000);
+	}
+  
+  @Test(priority= 3)
+  public void searchBank() throws InterruptedException {
+	  driver.get("https://www.rediff.com/");
+	  driver.switchTo().frame("moneyiframe");
+	  driver.findElement(By.id("query")).sendKeys("Yes Bank LTD");
+	  driver.findElement(By.id("query")).sendKeys(Keys.ENTER);
+	  
+
+  }
+
+  
+  
+  @BeforeTest
+  public void beforeTest() {
+	  System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+		 driver = new ChromeDriver();
+		//parent P = new Child() passing the reference of parent and making the object of child.
+		//so that only the important features of the parent and child are visible. 
+		 
+  }
+  
+  @AfterMethod   //is used to run after every test method 
+  //we use this to check after everytest to see everytest is working or not 
+  
+	 public void AfterMethod(ITestResult result) throws IOException
+	 {
+		 //these 4 lines of code are for taking ss of failed test cases
+	  if(result.getStatus() == ITestResult.FAILURE) {   
+			 TakesScreenshot tc = (TakesScreenshot)driver;
+			 File src = tc.getScreenshotAs(OutputType.FILE);
+			FileHandler.copy(src, new File(result.getName()+".png"));
+;		 }
+	 }
+  
+
+  @AfterTest
+  public void afterTest() {
+	  driver.close();
+  }
+
+}
