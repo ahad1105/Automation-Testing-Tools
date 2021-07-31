@@ -37,3 +37,31 @@ public class FirstTest {
   }
 
 }
+
+
+
+
+
+
+output : 
+//Google Chrome is starting ...
+[RemoteTestNG] detected TestNG version 7.4.0
+Starting ChromeDriver 91.0.4472.101 (af52a90bf87030dd1523486a1cd3ae25c5d76c9b-refs/branch-heads/4472@{#1462}) on port 47743
+Only local connections are allowed.
+Please see https://chromedriver.chromium.org/security-considerations for suggestions on keeping ChromeDriver safe.
+ChromeDriver was started successfully.
+Jul 31, 2021 11:25:34 AM org.openqa.selenium.remote.ProtocolHandshake createSession
+INFO: Detected dialect: W3C
+PASSED: Titletest       //name of the main method that is passed 
+
+===============================================
+    Default test
+    Tests run: 1, Failures: 0, Skips: 0                        //summary of the test ng 
+===============================================
+
+
+===============================================
+Default suite
+Total tests run: 1, Passes: 1, Failures: 0, Skips: 0        //suite: collection of all test cases , summary of all test cases. 
+===============================================
+
