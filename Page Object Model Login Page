@@ -1,0 +1,54 @@
+Page Object Model 
+Number Java Classes is equals to number of Pages on Web Application
+
+
+
+package day5;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class LoginPage {
+
+	 
+		WebDriver driver;                      //webdriver is initialised
+		public LoginPage(WebDriver driver)              //create a constructor of webdriver page initialise it with driver        
+		{
+			this.driver = driver;
+		}
+		By e_un = By.name("txtUsername");         //initialsing stuffs
+		By e_pwd = By.name("txtPassword");
+		By e_login = By.id("btnLogin");
+		By e_forget = By.linkText("Forgot your password?");
+		
+		//creating methods to pass the values 
+    public void setUserName(String user)      ........>set username
+		{
+			driver.findElement(e_un).sendKeys(user);
+		}
+    
+    
+		
+		public void setPwd(String pwd)           ....................>set passwd   
+		{
+			driver.findElement(e_pwd).sendKeys(pwd);
+		}
+		
+		public void clickLogin()                        ......................>click login
+		{
+			driver.findElement(e_login).click();
+		}
+		
+		public void clickForget()                           ......................>forget the passwd 
+		{
+			driver.findElement(e_forget).click();
+		}
+		public void doLogin(String user,String pwd)               ...................>login again 
+		{
+			setUserName(user);
+			setPwd(pwd);
+		}
+
+	}
+
+
