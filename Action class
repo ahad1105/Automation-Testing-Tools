@@ -1,0 +1,37 @@
+/*Action is interface and mostly used in making composite actions(group of actions into single unit).abstract
+Actions is class and used whenever there is need of working with mouse and keyboard*/
+
+//To control Keyboard
+
+package day6;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.interactions.Action;
+import org.testng.annotations.Test;
+
+import fm.Base;
+
+public class ActionsExample extends Base{
+  @Test
+  public void f() throws Exception {
+	  Actions ac = new Actions(driver);
+	  driver.get("http://bing.com");
+	  WebElement searchField = driver.findElement(By.id("sb_form_q"));
+	  Thread.sleep(2000);
+	  Action a = ac.keyDown(Keys.SHIFT)	//presses shift key
+			  .sendKeys(searchField,"lti")//types lti in search field
+			  
+			  .keyUp(Keys.SHIFT)	//releases shift key
+			  .doubleClick(searchField)	//right click
+			  .contextClick(searchField).build();	//compressing into a single unit
+	  a.perform();	//to perform composite action
+	  
+	  Thread.sleep(2000);
+	  
+	  
+	  
+	  
+  }
+}
