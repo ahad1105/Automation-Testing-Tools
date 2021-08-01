@@ -1,0 +1,18 @@
+Headless Execution - is used to start the beowser withouth any gui 
+it saves gui loading and user can work withouth waiting for the browser screen 
+
+Code for Chrome : 
+System.setProperty("webdriver.chrome.driver", "C:\\Users\\User\\Desktop\\Sleenium\\chromedriver_win32\\chromedriver.exe");
+ChromeOptions op=new ChromeOptions();
+op.addArguments("--headless");
+
+
+Code for firefox:
+System.setProperty("webdriver.gecko.driver", "C:\\Users\\User\\Desktop\\Sleenium\\geckodriver-v0.29.1-win64\\geckodriver.exe");
+FirefoxOptions options = new Firefox options
+options.addArguments("--headless");
+
+To disable notifications :
+op.addArguments("--disable-notifications");
+
+
