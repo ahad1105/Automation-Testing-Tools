@@ -1,0 +1,75 @@
+Introduction : open weather map.org website , generate your own api keys , 
+
+
+
+
+
+
+
+Formats - 
+
+
+Type1 
+@Test(enabled =true , description = "For Getting Weather information")
+  public void gettingWeatherInfo() {
+	  RestAssured.when()
+	  			//.get("http://api.openweathermap.org/data/2.5/weather?q=Delhi&appid=981d0095475c811603828a5cfd5f9f2b")
+	             .get("http://api.openweathermap.org/data/2.5/weather?q=Delhi&appid=4c637dac370babad2bd588248615efff")
+	  			.then()
+	  			.log()
+	  			.body()
+	  			.statusCode(200);
+  }
+  
+  
+  Type2
+  @Test(enabled = true, description = "For getting info about various other methods")
+	 public void getWeatherInfo2() {
+	  
+		  Response res=RestAssured.when()
+				   .get("http://api.openweathermap.org/data/2.5/weather?q=Delhi&appid=4c637dac370babad2bd588248615efff");
+				  
+				    System.out.println("the feautre is " +res.prettyPrint());  //its a way to format your json output format
+		  			System.out.println("the time is " +res.getTime());      //gives time
+		  			System.out.println("the code is " +res.getStatusCode());     //gives code
+		  			System.out.println("the content type is " +res.getContentType());     //gives in which format the content is
+		  			
+	  }
+    
+    Type3  //for specific type only 
+    
+    @Test(enabled = true)
+		 public void getWeatherInfo3() {
+		  		RestAssured.given()
+		  					.queryParam("q", "Delhi")
+		  					.queryParam("appid", "4c637dac370babad2bd588248615efff")
+		  					.when()
+		  						.get("http://api.openweathermap.org/data/2.5/weather")
+		  					.then()
+		  						.log()
+		  						.body().
+		  						statusCode(200);
+			  			
+		  }
+      
+      
+      Type 4 //for specific type
+      
+      
+      @Test(enabled =false, description = "For Getting Weather information")
+		 public void getWeatherInfo4() {
+		  		Map<String,String> param=new HashMap<String,String>();
+		  		param.put("q","Mumbai");
+		  		param.put("appid", "4c637dac370babad2bd588248615efff");
+		  		RestAssured.given()
+		  					.queryParams(param)
+		  					//.queryParam("appid", "4c637dac370babad2bd588248615efff")
+		  					.when()
+		  						.get("http://api.openweathermap.org/data/2.5/weather")
+		  					.then()
+		  						.log()
+		  						.body().
+		  						statusCode(200);
+			  			
+		  }
+	  
