@@ -1,0 +1,61 @@
+package git;
+
+import static io.restassured.RestAssured.given;
+
+import org.json.simple.JSONObject;
+import org.testng.annotations.Test;
+
+public class GitExample {
+	@Test(enabled = false, description = "Getting all Repository")
+	public void gettingAllRepository() {
+
+		given()
+			.auth()  //to specify there is authentication
+			.oauth2("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")    //to specify which authentication
+		.when()
+			.get("https://api.github.com/user/repos")
+		.then()
+			.log()
+			.body()
+			.statusCode(200);}
+		
+		@Test(enabled=false, description = "For creating a repo")
+		  public void createRepo() {
+			  
+			  JSONObject param = new JSONObject();
+			  
+			  param.put("name", "RestAssuredRepo");
+			  param.put("description", "Created on August 3rd");
+			  param.put("homepage", "https://github.com/ahad1105");
+			   
+			   given()
+			  		.header("Content-Type", "application/json")
+			  		.body(param.toJSONString())
+			  		.auth()
+					.oauth2("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")
+			  .when()
+				  .post("https://api.github.com/user/repos")
+			  .then()
+				  .log()
+				  .body()
+				  .statusCode(201);
+	}
+		
+		
+			@Test(enabled = true, description = "Deleting repo")
+			public void DeleteRepository() {
+
+				given()
+					.auth()  //to specify there is authentication
+					//.oauth2("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")
+					.oauth2("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")//to specify which authentication
+				.when()
+					.delete("https://api.github.com/repos/ahad1105/RestAssuredRepo")
+				
+				.then()
+					.log()
+					.body()
+					.statusCode(404);}
+	
+
+}
