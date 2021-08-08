@@ -1,0 +1,156 @@
+Negative Testing using rest assured API
+
+package contactListAPI;
+
+import static io.restassured.RestAssured.given;
+
+import org.json.simple.JSONObject;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class NegativeTesting {
+
+	@Test(enabled = true, description = "Get a contact which does not Exist")
+	public void getSpecificContact() {
+
+		given()
+		.when()
+			.get("http://3.13.86.142:3000/contacts/8")
+		.then()
+			.log().body().statusCode(404); //contact not found
+	}
+	
+	@Test(enabled = true, description = "Add new contact information with missing parameter")
+	public void addWithMissingParam() {
+
+		JSONObject info = new JSONObject();
+		JSONObject location = new JSONObject();
+		JSONObject employer = new JSONObject();
+
+		location.put("city", "Mumbai");
+		location.put("country", "India");
+
+		employer.put("jobTitle", "Software Tester");
+		employer.put("company", "LTI");
+
+		info.put("firstName", "Ahad");
+		//info.put("lastName", "Khan");
+		info.put("email", "ahad70429@gmail.com");
+		info.put("location", location);
+		info.put("employer", employer);
+
+		String err = given()
+						.header("Content-Type", "application/json")
+						.body(info.toJSONString())
+					.when()
+						.post("http://3.13.86.142:3000/contacts")
+					.then()
+						.log().body().statusCode(400) //bad request
+						.extract().path("err"); 
+		
+		Assert.assertEquals(err, "Contacts validation failed: lastName: Last Name is required");
+	}
+	
+	@Test(enabled = true, description = "Add new character with information")
+	public void Maxcharactertest() {
+
+		JSONObject info = new JSONObject();
+		JSONObject location = new JSONObject();
+		JSONObject employer = new JSONObject();
+
+		location.put("city", "MumbaiMumbaiMumbaiMumbaiMumbaiMumbai");
+		location.put("country", "India");
+
+		employer.put("jobTitle", "Software Tester");
+		employer.put("company", "LTI");
+
+		info.put("firstName", "Ahad");
+		//info.put("lastName", "Khan");
+		info.put("email", "ahad70429@gmail.com");
+		info.put("location", location);
+		info.put("employer", employer);
+
+		String err = given()
+						.header("Content-Type", "application/json")
+						.body(info.toJSONString())
+					.when()
+						.post("http://3.13.86.142:3000/contacts")
+					.then()
+						.log().body().statusCode(400) //bad request
+						.extract()
+						.path("err"); 
+		
+		Assert.assertTrue(err.contains("is longer than the maximum allowed length (30)"));
+	}
+	
+	
+	
+	@Test(enabled = true, description = "Add invalid password")
+	public void invalidfirstname() {
+
+		JSONObject info = new JSONObject();
+		JSONObject location = new JSONObject();
+		JSONObject employer = new JSONObject();
+
+		location.put("city", "MumbaiMumbaiMumbaiMumbaiMumbaiMumbai");
+		location.put("country", "India");
+
+		employer.put("jobTitle", "Software Tester");
+		employer.put("company", "LTI");
+
+		info.put("firstName", "Ahad99");
+		//info.put("lastName", "Khan");
+		info.put("email", "ahad70429@gmail");
+		info.put("location", location);
+		info.put("employer", employer);
+
+		String err = given()
+						.header("Content-Type", "application/json")
+						.body(info.toJSONString())
+					.when()
+						.post("http://3.13.86.142:3000/contacts")
+					.then()
+						.log().body().statusCode(400) //bad request
+						.extract()
+						.path("err"); 
+		
+		//Assert.assertTrue(err.contains("Invalid Password"));
+	}
+	
+	
+	@Test(enabled = true, description = "Add new character with information")
+	public void ivalidformatEmail() {
+
+		JSONObject info = new JSONObject();
+		JSONObject location = new JSONObject();
+		JSONObject employer = new JSONObject();
+
+		location.put("city", "MumbaiMumbaiMumbaiMumbaiMumbaiMumbai");
+		location.put("country", "India");
+
+		employer.put("jobTitle", "Software Tester");
+		employer.put("company", "LTI");
+
+		info.put("firstName", "Ahad");
+		//info.put("lastName", "Khan");
+		info.put("email", "ahad70429@gmail");
+		info.put("location", location);
+		info.put("employer", employer);
+
+		String err = given()
+						.header("Content-Type", "application/json")
+						.body(info.toJSONString())
+					.when()
+						.post("http://3.13.86.142:3000/contacts")
+					.then()
+						.log().body().statusCode(400) //bad request
+						.extract()
+						.path("err"); 
+		
+		Assert.assertTrue(err.contains("Contacts validation failed"));
+	}
+	
+	
+}
+	
+
